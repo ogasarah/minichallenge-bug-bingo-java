@@ -13,4 +13,9 @@ public enum Status{
     public String getLabel(){
         return label;
     }
+
+    // Mutating Constant -> Can't set enum.
+    // public void setLabel(String label){
+    //     this.label = label;
+    // }
 }

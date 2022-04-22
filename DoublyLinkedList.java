@@ -2,28 +2,39 @@ public class DoublyLinkedList<T>{
     private DoublyLinkedListNode<T> head;
     private DoublyLinkedListNode<T> tail;
     
-    synchronized public T dequeue(){
+    // Race condition
+    synchronized public T dequeue() {
+        // NPE
         if (head == null) {
             return null;    
         }
         
-        DoublyLinkedListNode node = this.head;
+        DoublyLinkedListNode node = head;
         T response = head.getValue();
         
-        this.head = this.head.getPrevious();
+        head = head.getPrevious();
         
-        if(this.head == null){
-            this.tail = null;
+        // NPE
+        if (head == null) {
+            tail = null;
             return response;
         }
         
-        this.head.setNext(null);
+        // Memory Leak -> didn't remove next pointer.
+        head.setNext(null);
         node.setPrevious(null);
         
-        return response; 
+        return response;
+
+        // Unreachable code -> returning before setting new head.
+        // head = head.getPrevious();
     }
     
-    synchronized public void enqueue(T value){
+    // Race condition
+    synchronized public void enqueue(T value) {
+        // Uninitialized Variable -> We never initialized node before trying to use it.
+        // DoublyLinkedListNode<T> node;
+        // node.setValue(value);
         DoublyLinkedListNode<T> node = new DoublyLinkedListNode<>(value);
         node.setValue(value);
         
