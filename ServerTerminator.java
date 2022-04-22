@@ -6,6 +6,7 @@ class ServerTerminator{
     }
     
     public void terminateNextServer(){
-        queue.dequeue().setStatus(Status.TERMINATING);
+        Server dequeuedServer = queue.dequeue();
+        if (dequeuedServer != null) dequeuedServer.setStatus(status.TERMINATED);
     }
 }

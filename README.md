@@ -33,3 +33,14 @@ Choose the code snippet with your preferred programming language. Potential issu
         </tr>
     </thead>
 </table>
+
+
+<h2>Java execution through terminal (requires implementation of main method)</h2>
+
+compile:
+
+javac FileName.java
+
+execute:
+
+java FileName
